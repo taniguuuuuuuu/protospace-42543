@@ -18,22 +18,31 @@
           <div class="nav__left">
             <%= link_to image_tag("logo.png", class: :logo), root_path %>
           </div>
-          <%# ログインしているときは以下を表示するようにしましょう %>
-            <%# <div class="nav__right"> %>
-              <%# <%= link_to "ログアウト", root_path, class: :nav__logout %>
-              <%# <%= link_to "New Proto", root_path, class: :nav__btn %>
-            <%# </div> %>
-          <%# // ログインしているときは上記を表示するようにしましょう %>
-          <%# ログインしていないときは以下を表示するようにしましょう %>
-            <div class="nav__right">
-              <%= link_to "ログイン", root_path, class: :nav__btn %>
-              <%= link_to "新規登録", new_user_registration_path, class: "nav__btn" %>
-            </div>
-          <%# // ログインしていないときは上記を表示するようにしましょう %>
+
+          <div class="nav__right">
+            <% if user_signed_in? %>
+
+              <%= link_to "ログアウト",
+                            destroy_user_session_path,
+                            data: { turbo_method: :delete },
+                            class: "nav__logout",
+                            class: :nav__btn %>
+
+              <%# 「New Proto」は仮置きリンク。new_proto_path が無ければ root_path に退避 %>
+              <%= link_to "New Proto",
+                          (defined?(new_proto_path) ? new_proto_path : root_path),
+                          class: :nav__btn %>
+            <% else %>
+              <%= link_to "ログイン", new_user_session_path, class: :nav__btn %>
+              <%= link_to "新規登録", new_user_registration_path, class: :nav__btn %>
+            <% end %>
+          </div>
         </div>
       </div>
     </header>
+
     <%= yield %>
+
     <footer class="footer">
       <p class="copyright">Copyright © PROTO SPACE All rights reserved.</p>
     </footer>
