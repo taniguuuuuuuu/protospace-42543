@@ -1,13 +1,10 @@
 class Prototype < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_many :comments, dependent: :destroy
 
-  validates :title,      presence: true
-  validates :catch_copy, presence: true
-  validates :concept,    presence: true
-
-  validates :image,
-           attached: true,
-           content_type: %w[image/png image/jpg image/jpeg],
-           size: { less_than: 5.megabytes }
+  with_options presence: true do
+    validates :title, :catch_copy, :concept
+    validates :image
+  end
 end
