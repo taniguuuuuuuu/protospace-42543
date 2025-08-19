@@ -37,11 +37,9 @@ class PrototypesController < ApplicationController
   end
 
   def destroy
-    if @prototype.destroy
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    @prototype = Prototype.find(params[:id])
+    @prototype.destroy
+    redirect_to root_path, notice: "削除しました"
   end
 private
 
