@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "prototypes#index"
 
   resources :prototypes, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :comments, only: :create
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
