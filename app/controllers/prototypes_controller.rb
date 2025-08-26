@@ -21,8 +21,9 @@ class PrototypesController < ApplicationController
 
 
   def show
-    @prototype = Prototype.find(params[:id])
-    @comment = Comment.new
+  @prototype = Prototype.find(params[:id])
+  @comment   = Comment.new
+  @comments  = @prototype.comments.includes(:user).order(created_at: :asc)
   end
 
   def edit

@@ -45,7 +45,8 @@
         <%# 以下（コメントフォーム/一覧）は配布のままコメントアウト状態を維持 %>
         <%# ログインしているユーザーには以下のコメント投稿フォームを表示する %>
         <% if user_signed_in? %>
-          <%= form_with model: [@comment],local: true do |f|%>
+          <%= form_with model: @comment, url: comments_path, local: true do |f| %>
+            <%= f.hidden_field :prototype_id, value: @prototype.id %>  
             <div class="field">
               <%= f.label :content, "コメント" %><br />
               <%= f.text_field :content, id:"comment_content" %>
@@ -58,11 +59,12 @@
         <%# // ログインしているユーザーには上記を表示する %>
 
         <ul class="comments_lists">
-          <%# 投稿に紐づくコメントを一覧する処理を記述する %>
+          <% @comments.each do |comment| %>
             <li class="comments_list">
-              <%# <%= " コメントのテキスト "%>
-              <%# <%= link_to "（ ユーザー名 ）", root_path, class: :comment_user %>
+              <%= comment.content%>
+              <%= link_to "（#{comment.user.name}）", root_path, class: :comment_user %>
             </li>
+          <% end %>
           <%# // 投稿に紐づくコメントを一覧する処理を記述する %>
         </ul>
       </div>
