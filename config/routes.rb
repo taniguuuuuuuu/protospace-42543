@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :prototypes, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :comments, only: :create
+  resources :users,      only: :show
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
