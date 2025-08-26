@@ -65,4 +65,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webdrivers"
 end
+
+gem 'devise'
+gem 'pry-rails'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
